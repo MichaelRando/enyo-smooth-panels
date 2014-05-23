@@ -44,7 +44,7 @@ enyo.kind({
             if (panel != currentPanel) {
                 panel.hide();
             }
-        });
+        }, this);
         this.animationStartHandler = enyo.bind(this, this.animationStart);
         this.animationEndHandler = enyo.bind(this, this.animationEnd);
     },
@@ -140,11 +140,8 @@ enyo.kind({
      * Shows the newly selected panel and starts the in animation.
      */
     startInAnimation: function() {
-        this.applyAnimation(this.newPanel, this.currInAnim, this.duration, this.easing, "backwards");
-        this.newPanel.offsetLeft;
+        this.applyAnimation(this.newPanel, this.currInAnim, this.duration, this.easing,"backwards");
         this.newPanel.show();
-        this.newPanel.sendShowingChangedEvent();
-        this.newPanel.reflow();
     },
     /**
      * @private
@@ -153,7 +150,7 @@ enyo.kind({
      */
     startOutAnimation: function() {
         if (this.oldPanel) {
-            this.applyAnimation(this.oldPanel, this.currOutAnim, this.duration, this.easing, "forwards");
+            this.applyAnimation(this.oldPanel, this.currOutAnim, this.duration, this.easing,"forwards");
         }
 
         if (!this.oldPanel || !this.currOutAnim || this.currOutAnim == SmoothPanels.NONE || this.duration === 0) {
@@ -261,8 +258,6 @@ enyo.kind({
             return;
         }
         panel.show();
-        panel.sendShowingChangedEvent();
-        panel.reflow();
         if (this.selected) {
             this.selected.hide();
         }
